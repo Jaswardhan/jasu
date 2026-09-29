@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <title>GATC &amp; Repairer Hub — Metro360</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+  
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo">
+        <div class="logo-icon">M<span>360</span></div>
+        <div class="logo-text">
+          <span class="logo-name">Metro360</span>
+          <span class="logo-sub">by EvolveVI</span>
+        </div>
+      </a>
+      <div class="nav-links">
+        <a href="../index.html" class="nav-link">Home</a>
+        <a href="verify.html" class="nav-link ">Verify QR</a>
+        <a href="consumer.html" class="nav-link ">Consumer Portal</a>
+        <a href="about.html" class="nav-link ">About</a>
+      </div>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" title="Toggle theme"><span class="theme-icon">🌙</span></button>
+        <a href="login.html" class="btn btn-outline">Login</a>
+        <a href="register.html" class="btn btn-primary">Register</a>
+      </div>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="../index.html" class="mobile-link">Home</a>
+      <a href="verify.html" class="mobile-link">Verify QR</a>
+      <a href="consumer.html" class="mobile-link">Consumer Portal</a>
+      <a href="about.html" class="mobile-link">About</a>
+      <a href="login.html" class="mobile-link">Login</a>
+      <a href="register.html" class="mobile-link">Register</a>
+    </div>
+  </nav>
+
+
+  <div class="dashboard-layout">
+    <div class="container">
+      <div class="dashboard-header">
+        <div>
+          <span class="badge badge-info">Government Approved Test Centre (GATC) Rules 2013/2026</span>
+          <h1>Apex Calibration Services (GATC-2026-09)</h1>
+          <p>NABL Accredited &amp; Department of Consumer Affairs Licensed Test Centre</p>
+        </div>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-header border-b">
+          <h3>🔬 Assigned Testing Requests &amp; Calibration Jobs</h3>
+        </div>
+        <div class="card-body p-0">
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Job ID</th>
+                  <th>IDI Reference</th>
+                  <th>Instrument Category</th>
+                  <th>Status</th>
+                  <th>Assigned LMO</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>GATC-JOB-991</code></td>
+                  <td><strong>IDI-2026-WM-3310</strong></td>
+                  <td>Industrial Liquid Flow Meter</td>
+                  <td><span class="badge badge-warning">Testing In Progress</span></td>
+                  <td>Officer V. K. Sharma</td>
+                  <td><button class="btn btn-xs btn-primary" onclick="showToast('Loading digital test report form for IDI-2026-WM-3310', 'info')">📝 Fill Digital Test Report</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Standardized Digital Test Report Form -->
+      <div class="card">
+        <div class="card-header border-b">
+          <h3>📋 Submit Standardized Digital Test Report (SIH 26035 / 26036 Standard)</h3>
+        </div>
+        <div class="card-body">
+          <form onsubmit="handleGatcSubmit(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Instrument IDI</label>
+                <input type="text" class="form-control" value="IDI-2026-WM-3310" id="gatcIdi" readonly />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Tester / Engineer Name</label>
+                <input type="text" class="form-control" value="Er. Ankit Verma (Lead Calibration Engineer)" id="gatcTester" required />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Parameters Tested (Flow Rate, Linearity, Zero Point Shift)</label>
+              <input type="text" class="form-control" value="Flow rate accuracy 100L/min, 500L/min, 1000L/min, Pressure drop check" id="gatcParams" required />
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Raw Calibration Readings Log</label>
+                <textarea class="form-control" id="gatcRaw" rows="2" required>Run 1: 100.1L/min (+0.1%), Run 2: 500.2L/min (+0.04%), Run 3: 999.8L/min (-0.02%)</textarea>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Calculated Mean Accuracy (%)</label>
+                <input type="text" class="form-control" id="gatcAcc" value="99.96% Accuracy (Compliant)" required />
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-success">Transmit Test Report to Assigned LMO</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="nav-logo">
+            <div class="logo-icon">M<span>360</span></div>
+            <div class="logo-text"><span class="logo-name">Metro360</span><span class="logo-sub">by EvolveVI</span></div>
+          </div>
+          <p>Unified Digital Verification System for Weighing &amp; Measuring Instruments under Legal Metrology.</p>
+          <div class="footer-badge">SIH 2026 &middot; Problem ID: 26036</div>
+        </div>
+        <div class="footer-col">
+          <h4>Stakeholder Portals</h4>
+          <ul>
+            <li><a href="owner.html">Trader / Owner Portal</a></li>
+            <li><a href="lmo.html">Legal Metrology Officer (LMO)</a></li>
+            <li><a href="gatc.html">GATC &amp; Repairer Hub</a></li>
+            <li><a href="manufacturer.html">Manufacturer / Importer</a></li>
+            <li><a href="admin.html">Directorate Admin Center</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Public Services</h4>
+          <ul>
+            <li><a href="verify.html">Instant QR Verification</a></li>
+            <li><a href="consumer.html">Consumer Complaint Portal</a></li>
+            <li><a href="consumer.html#track">Track Complaint Status</a></li>
+            <li><a href="about.html">Legal Metrology Act 2009</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Metro360 &middot; Team EvolveVI &middot; Smart India Hackathon 2026</p>
+      </div>
+    </div>
+  </footer>
+  <script src="../js/data.js"></script>
+  <script src="../js/app.js"></script>
+
+  <script>
+    function handleGatcSubmit(e) {
+      e.preventDefault();
+      const db = getDB();
+      const newRep = {
+        reportId: `GATC-REP-2026-${Math.floor(100 + Math.random() * 900)}`,
+        idi: document.getElementById('gatcIdi').value,
+        gatcName: 'Apex Calibration Services (GATC)',
+        testerName: document.getElementById('gatcTester').value,
+        testDate: new Date().toISOString().split('T')[0],
+        parametersTested: document.getElementById('gatcParams').value,
+        measuredAccuracy: document.getElementById('gatcAcc').value,
+        status: 'PASSED & TRANSMITTED TO LMO',
+        rawReadings: document.getElementById('gatcRaw').value
+      };
+      db.gatcTestReports.unshift(newRep);
+      saveDB(db);
+      showToast(`Digital Test Report ${newRep.reportId} submitted to LMO Officer V. K. Sharma!`, 'success');
+    }
+  </script>
+</body>
+</html>

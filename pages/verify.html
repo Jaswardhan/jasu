@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <title>Public Instrument QR Verification — Metro360</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+  
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo">
+        <div class="logo-icon">M<span>360</span></div>
+        <div class="logo-text">
+          <span class="logo-name">Metro360</span>
+          <span class="logo-sub">by EvolveVI</span>
+        </div>
+      </a>
+      <div class="nav-links">
+        <a href="../index.html" class="nav-link">Home</a>
+        <a href="verify.html" class="nav-link active">Verify QR</a>
+        <a href="consumer.html" class="nav-link ">Consumer Portal</a>
+        <a href="about.html" class="nav-link ">About</a>
+      </div>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" title="Toggle theme"><span class="theme-icon">🌙</span></button>
+        <a href="login.html" class="btn btn-outline">Login</a>
+        <a href="register.html" class="btn btn-primary">Register</a>
+      </div>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="../index.html" class="mobile-link">Home</a>
+      <a href="verify.html" class="mobile-link">Verify QR</a>
+      <a href="consumer.html" class="mobile-link">Consumer Portal</a>
+      <a href="about.html" class="mobile-link">About</a>
+      <a href="login.html" class="mobile-link">Login</a>
+      <a href="register.html" class="mobile-link">Register</a>
+    </div>
+  </nav>
+
+
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Public Transparency Portal</span>
+        <h1 class="section-title">Instant Instrument QR &amp; IDI Verification</h1>
+        <p class="section-desc">Scan or enter any Instrument Digital Identity (IDI) or Serial Number to verify authenticity, certificate validity, and government seal status.</p>
+      </div>
+
+      <div class="search-hero-box card p-4 mb-4">
+        <form onsubmit="handlePublicSearch(event)" class="search-form">
+          <div class="form-group" style="flex:1;">
+            <input type="text" class="form-control form-control-lg" id="verifyQuery" placeholder="Enter IDI (e.g. IDI-2026-WM-8841) or Serial Number..." value="IDI-2026-WM-8841" required />
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg">🔍 Verify Authenticity</button>
+          <button type="button" class="btn btn-outline btn-lg" onclick="simulateQRScan()">📱 Camera QR Scan</button>
+        </form>
+      </div>
+
+      <div id="verifyResultContainer">
+        <!-- Verification Output Result -->
+      </div>
+    </div>
+  </section>
+
+  
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="nav-logo">
+            <div class="logo-icon">M<span>360</span></div>
+            <div class="logo-text"><span class="logo-name">Metro360</span><span class="logo-sub">by EvolveVI</span></div>
+          </div>
+          <p>Unified Digital Verification System for Weighing &amp; Measuring Instruments under Legal Metrology.</p>
+          <div class="footer-badge">SIH 2026 &middot; Problem ID: 26036</div>
+        </div>
+        <div class="footer-col">
+          <h4>Stakeholder Portals</h4>
+          <ul>
+            <li><a href="owner.html">Trader / Owner Portal</a></li>
+            <li><a href="lmo.html">Legal Metrology Officer (LMO)</a></li>
+            <li><a href="gatc.html">GATC &amp; Repairer Hub</a></li>
+            <li><a href="manufacturer.html">Manufacturer / Importer</a></li>
+            <li><a href="admin.html">Directorate Admin Center</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Public Services</h4>
+          <ul>
+            <li><a href="verify.html">Instant QR Verification</a></li>
+            <li><a href="consumer.html">Consumer Complaint Portal</a></li>
+            <li><a href="consumer.html#track">Track Complaint Status</a></li>
+            <li><a href="about.html">Legal Metrology Act 2009</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Metro360 &middot; Team EvolveVI &middot; Smart India Hackathon 2026</p>
+      </div>
+    </div>
+  </footer>
+  <script src="../js/data.js"></script>
+  <script src="../js/app.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Auto check query param if present
+      const urlParams = new URLSearchParams(window.location.search);
+      const queryIdi = urlParams.get('idi') || 'IDI-2026-WM-8841';
+      document.getElementById('verifyQuery').value = queryIdi;
+      performVerification(queryIdi);
+    });
+
+    function handlePublicSearch(e) {
+      e.preventDefault();
+      const q = document.getElementById('verifyQuery').value.trim();
+      performVerification(q);
+    }
+
+    function simulateQRScan() {
+      showToast('Camera active: Scanning QR Code...', 'info');
+      setTimeout(() => {
+        document.getElementById('verifyQuery').value = 'IDI-2026-WM-9902';
+        performVerification('IDI-2026-WM-9902');
+        showToast('QR Code Decoded: IDI-2026-WM-9902 (Fuel Dispensing Pump)', 'success');
+      }, 1200);
+    }
+
+    function performVerification(query) {
+      const db = getDB();
+      const inst = db.instruments.find(i => i.idi.toLowerCase() === query.toLowerCase() || i.serialNo.toLowerCase() === query.toLowerCase());
+      const container = document.getElementById('verifyResultContainer');
+
+      if (!inst) {
+        container.innerHTML = `
+          <div class="card p-4 text-center" style="border-left:6px solid var(--danger);">
+            <div style="font-size:40px; margin-bottom:10px;">⚠️</div>
+            <h2>Instrument Record Not Found</h2>
+            <p style="color:var(--text-muted);">No official Legal Metrology record exists for "${query}". If you suspect an unverified instrument being used commercially, please file a complaint below.</p>
+            <a href="consumer.html" class="btn btn-danger mt-3">Report Unverified Equipment</a>
+          </div>
+        `;
+        return;
+      }
+
+      const isValid = inst.status === 'Verified';
+      const statusColor = isValid ? 'var(--success)' : (inst.status === 'Expiring Soon' ? 'var(--warning)' : 'var(--danger)');
+      const qrSvg = generateSVGQR(inst.qrPayload, 160);
+
+      container.innerHTML = `
+        <div class="card p-4" style="border-left:8px solid ${statusColor};">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:20px;">
+            <div>
+              <span class="badge ${isValid ? 'badge-success' : 'badge-danger'}" style="font-size:16px; padding:6px 16px;">
+                ${isValid ? '✅ OFFICIALLY VERIFIED & STAMPED' : '⚠️ STATUS: ' + inst.status.toUpperCase()}
+              </span>
+              <h2 style="margin-top:15px; font-size:26px;">${inst.idi}</h2>
+              <p style="color:var(--text-muted); font-size:16px;">${inst.category}</p>
+            </div>
+            <div>
+              ${qrSvg}
+            </div>
+          </div>
+
+          <hr style="border-color:var(--border); margin:20px 0;" />
+
+          <div class="grid-3" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:15px;">
+            <div class="field-box">
+              <label style="font-size:11px; text-transform:uppercase; color:var(--text-muted); font-weight:700;">Owner / Trader</label>
+              <div style="font-size:16px; font-weight:700;">${inst.ownerName}</div>
+              <div style="font-size:12px; color:var(--text-muted);">${inst.address}</div>
+            </div>
+            <div class="field-box">
+              <label style="font-size:11px; text-transform:uppercase; color:var(--text-muted); font-weight:700;">Certificate Number</label>
+              <div style="font-size:16px; font-weight:700; color:var(--accent);">${inst.certificateNo}</div>
+            </div>
+            <div class="field-box">
+              <label style="font-size:11px; text-transform:uppercase; color:var(--text-muted); font-weight:700;">Government Seal / Stamp</label>
+              <div style="font-size:16px; font-weight:700;">${inst.stampDetails}</div>
+            </div>
+            <div class="field-box">
+              <label style="font-size:11px; text-transform:uppercase; color:var(--text-muted); font-weight:700;">Verification Date</label>
+              <div style="font-size:16px; font-weight:700;">${inst.verificationDate}</div>
+            </div>
+            <div class="field-box">
+              <label style="font-size:11px; text-transform:uppercase; color:var(--text-muted); font-weight:700;">Valid Until (Expiry)</label>
+              <div style="font-size:16px; font-weight:700; color:${statusColor};">${inst.expiryDate}</div>
+            </div>
+            <div class="field-box">
+              <label style="font-size:11px; text-transform:uppercase; color:var(--text-muted); font-weight:700;">Inspecting Officer</label>
+              <div style="font-size:16px; font-weight:700;">${inst.lmoName} (${inst.lmoId})</div>
+            </div>
+          </div>
+
+          <div style="margin-top:25px; display:flex; gap:15px; flex-wrap:wrap;">
+            <button class="btn btn-primary" onclick="openCertificateWindow('${inst.idi}')">📜 View / Print Official Certificate</button>
+            <a href="consumer.html?idi=${inst.idi}" class="btn btn-outline">🚨 File Complaint against this Instrument</a>
+          </div>
+        </div>
+      `;
+    }
+  </script>
+</body>
+</html>

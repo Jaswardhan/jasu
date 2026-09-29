@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <title>Consumer Portal &amp; Complaint System — Metro360</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+  
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo">
+        <div class="logo-icon">M<span>360</span></div>
+        <div class="logo-text">
+          <span class="logo-name">Metro360</span>
+          <span class="logo-sub">by EvolveVI</span>
+        </div>
+      </a>
+      <div class="nav-links">
+        <a href="../index.html" class="nav-link">Home</a>
+        <a href="verify.html" class="nav-link ">Verify QR</a>
+        <a href="consumer.html" class="nav-link active">Consumer Portal</a>
+        <a href="about.html" class="nav-link ">About</a>
+      </div>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" title="Toggle theme"><span class="theme-icon">🌙</span></button>
+        <a href="login.html" class="btn btn-outline">Login</a>
+        <a href="register.html" class="btn btn-primary">Register</a>
+      </div>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="../index.html" class="mobile-link">Home</a>
+      <a href="verify.html" class="mobile-link">Verify QR</a>
+      <a href="consumer.html" class="mobile-link">Consumer Portal</a>
+      <a href="about.html" class="mobile-link">About</a>
+      <a href="login.html" class="mobile-link">Login</a>
+      <a href="register.html" class="mobile-link">Register</a>
+    </div>
+  </nav>
+
+
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Consumer Protection</span>
+        <h1 class="section-title">Public Complaint &amp; Enforcement Portal</h1>
+        <p class="section-desc">Report short-delivery, tampered seals, expired certificates, or illegal weights directly to Legal Metrology Enforcement Authorities.</p>
+      </div>
+
+      <div class="grid-2" style="display:grid; grid-template-columns:1fr 1fr; gap:30px;">
+
+        <!-- File Complaint Form -->
+        <div class="card p-4">
+          <h3 style="margin-bottom:20px;">🚨 File a Consumer Complaint</h3>
+          <form onsubmit="handleConsumerComplaint(event)">
+            <div class="form-group">
+              <label class="form-label">Instrument Digital ID (IDI) or Serial No (Optional)</label>
+              <input type="text" class="form-control" id="cmpIdi" placeholder="e.g. IDI-2026-WM-9902" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Complaint Category</label>
+              <select class="form-control" id="cmpCat" required>
+                <option value="Short Delivery / Inaccurate Quantity">Short Delivery / Inaccurate Quantity</option>
+                <option value="Expired Verification Seal / Unstamped Equipment">Expired Verification Seal / Unstamped Equipment</option>
+                <option value="Tampered Physical Lead Seal">Tampered Physical Lead Seal</option>
+                <option value="Overcharging / Non-Standard Weight">Overcharging / Non-Standard Weight</option>
+              </select>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Your Name</label>
+                <input type="text" class="form-control" id="cmpName" placeholder="Consumer Name" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Mobile Number</label>
+                <input type="tel" class="form-control" id="cmpPhone" placeholder="9811XXXXXX" required />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Detailed Incident Description</label>
+              <textarea class="form-control" id="cmpDesc" rows="3" placeholder="Describe location, shop name, nozzle/scale number..." required></textarea>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Upload Evidence / Receipt Photo</label>
+              <input type="file" class="form-control" accept="image/*" />
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">Submit Complaint &amp; Generate Ticket</button>
+          </form>
+        </div>
+
+        <!-- Track Complaint Status -->
+        <div class="card p-4" id="track">
+          <h3 style="margin-bottom:20px;">🔍 Track Complaint Ticket Status</h3>
+          <div class="form-group">
+            <input type="text" class="form-control" id="trackQuery" placeholder="Enter Ticket Reference (e.g. CMP-2026-0091)..." value="CMP-2026-0091" />
+          </div>
+          <button class="btn btn-outline btn-block mb-4" onclick="trackComplaint()">Track Ticket Status</button>
+
+          <div id="trackResult">
+            <!-- JS populated -->
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="nav-logo">
+            <div class="logo-icon">M<span>360</span></div>
+            <div class="logo-text"><span class="logo-name">Metro360</span><span class="logo-sub">by EvolveVI</span></div>
+          </div>
+          <p>Unified Digital Verification System for Weighing &amp; Measuring Instruments under Legal Metrology.</p>
+          <div class="footer-badge">SIH 2026 &middot; Problem ID: 26036</div>
+        </div>
+        <div class="footer-col">
+          <h4>Stakeholder Portals</h4>
+          <ul>
+            <li><a href="owner.html">Trader / Owner Portal</a></li>
+            <li><a href="lmo.html">Legal Metrology Officer (LMO)</a></li>
+            <li><a href="gatc.html">GATC &amp; Repairer Hub</a></li>
+            <li><a href="manufacturer.html">Manufacturer / Importer</a></li>
+            <li><a href="admin.html">Directorate Admin Center</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Public Services</h4>
+          <ul>
+            <li><a href="verify.html">Instant QR Verification</a></li>
+            <li><a href="consumer.html">Consumer Complaint Portal</a></li>
+            <li><a href="consumer.html#track">Track Complaint Status</a></li>
+            <li><a href="about.html">Legal Metrology Act 2009</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Metro360 &middot; Team EvolveVI &middot; Smart India Hackathon 2026</p>
+      </div>
+    </div>
+  </footer>
+  <script src="../js/data.js"></script>
+  <script src="../js/app.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const idiParam = urlParams.get('idi');
+      if (idiParam) document.getElementById('cmpIdi').value = idiParam;
+      trackComplaint();
+    });
+
+    function handleConsumerComplaint(e) {
+      e.preventDefault();
+      const db = getDB();
+      const idi = document.getElementById('cmpIdi').value || 'IDI-2026-WM-9902';
+      const cat = document.getElementById('cmpCat').value;
+      const name = document.getElementById('cmpName').value;
+      const phone = document.getElementById('cmpPhone').value;
+      const desc = document.getElementById('cmpDesc').value;
+
+      const newTicket = {
+        ticketId: `CMP-2026-${Math.floor(1000 + Math.random() * 9000)}`,
+        idi: idi,
+        serialNo: 'SN-AUTO',
+        complainantName: name,
+        phone: phone,
+        category: cat,
+        description: desc,
+        submittedDate: new Date().toISOString().split('T')[0],
+        status: 'Submitted',
+        officerAssigned: 'Officer V. K. Sharma',
+        findings: 'Complaint logged into automated Legal Metrology cross-checking engine.'
+      };
+
+      db.complaints.unshift(newTicket);
+      saveDB(db);
+
+      showToast(`Complaint Ticket ${newTicket.ticketId} generated! Assigned to Legal Metrology Officer.`, 'success');
+      document.getElementById('trackQuery').value = newTicket.ticketId;
+      trackComplaint();
+    }
+
+    function trackComplaint() {
+      const query = document.getElementById('trackQuery').value.trim();
+      const db = getDB();
+      const cmp = db.complaints.find(c => c.ticketId.toLowerCase() === query.toLowerCase() || c.idi.toLowerCase() === query.toLowerCase());
+      const box = document.getElementById('trackResult');
+
+      if (!cmp) {
+        box.innerHTML = `<div style="color:var(--text-muted);">No ticket record found for "${query}".</div>`;
+        return;
+      }
+
+      box.innerHTML = `
+        <div style="background:var(--bg-card-hover); padding:16px; border-radius:10px; border-left:4px solid var(--accent);">
+          <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
+            <strong>${cmp.ticketId}</strong>
+            <span class="badge badge-warning">${cmp.status}</span>
+          </div>
+          <div style="font-size:13px; color:var(--text-muted); margin-bottom:6px;"><strong>Instrument IDI:</strong> ${cmp.idi}</div>
+          <div style="font-size:13px; color:var(--text-muted); margin-bottom:6px;"><strong>Category:</strong> ${cmp.category}</div>
+          <div style="font-size:13px; margin-bottom:10px;">"${cmp.description}"</div>
+          <div style="font-size:12px; background:rgba(37,99,235,0.1); padding:8px; border-radius:6px; color:var(--accent);">
+            <strong>Authority Findings:</strong> ${cmp.findings}
+          </div>
+        </div>
+      `;
+    }
+  </script>
+</body>
+</html>

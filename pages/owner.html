@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trader / Owner Portal — Metro360</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo">
+        <div class="logo-icon">M<span>360</span></div>
+        <div class="logo-text">
+          <span class="logo-name">Metro360</span>
+          <span class="logo-sub">by EvolveVI</span>
+        </div>
+      </a>
+      <div class="nav-links">
+        <a href="../index.html" class="nav-link">Home</a>
+        <a href="verify.html" class="nav-link">Verify QR</a>
+        <a href="consumer.html" class="nav-link">Consumer Portal</a>
+        <a href="about.html" class="nav-link">About</a>
+      </div>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" title="Toggle theme"><span class="theme-icon">🌙</span></button>
+        <a href="login.html" class="btn btn-outline">Login</a>
+        <a href="register.html" class="btn btn-primary">Register</a>
+      </div>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="../index.html" class="mobile-link">Home</a>
+      <a href="verify.html" class="mobile-link">Verify QR</a>
+      <a href="consumer.html" class="mobile-link">Consumer Portal</a>
+      <a href="about.html" class="mobile-link">About</a>
+      <a href="login.html" class="mobile-link">Login</a>
+      <a href="register.html" class="mobile-link">Register</a>
+    </div>
+  </nav>
+
+  <div class="dashboard-layout" style="padding-top:100px; padding-bottom:60px;">
+    <div class="container">
+      <div class="dash-header">
+        <div>
+          <span class="badge badge-primary">Trader &amp; Instrument Owner Portal</span>
+          <h1 id="ownerTitle" class="dash-title">Rajesh Traders Pvt Ltd</h1>
+          <p class="dash-subtitle">GSTIN: <span id="ownerGST">07AAAAA0000A1Z5</span> &middot; Jurisdiction: New Delhi</p>
+        </div>
+        <div class="dash-actions">
+          <button class="btn btn-primary" onclick="openApplyModal()">+ New Verification Application</button>
+        </div>
+      </div>
+
+      <!-- Stats Grid -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-card-label">Total Instruments</div>
+          <div class="stat-card-value" id="statTotal">4</div>
+          <div class="text-xs text-muted">Registered IDIs</div>
+        </div>
+        <div class="stat-card secondary">
+          <div class="stat-card-label">Verified &amp; Active</div>
+          <div class="stat-card-value text-success" id="statVerified">2</div>
+          <div class="text-xs text-muted">Stamped Compliance</div>
+        </div>
+        <div class="stat-card warning">
+          <div class="stat-card-label">Expiring Soon</div>
+          <div class="stat-card-value text-accent" id="statExpiring">1</div>
+          <div class="text-xs text-muted">Action Required within 30 days</div>
+        </div>
+        <div class="stat-card accent">
+          <div class="stat-card-label">Expired / Pending</div>
+          <div class="stat-card-value" id="statExpired">1</div>
+          <div class="text-xs text-muted">Non-compliant / Action Pending</div>
+        </div>
+      </div>
+
+      <!-- Pre-verification checklist banner -->
+      <div class="info-box mb-4" style="display:flex; align-items:center; gap:16px; flex-wrap:wrap;">
+        <div style="font-size:1.8rem;">📋</div>
+        <div style="flex:1;">
+          <h4 style="font-size:1rem; font-weight:700; margin-bottom:4px;">Pre-Verification Readiness Self-Check Checklist</h4>
+          <p style="color:var(--text-secondary); font-size:0.85rem;">Before official inspection by Legal Metrology Officer (LMO): Ensure standard weights are clean, level bubble is centered, power supply is grounded, and seal wire tabs are intact.</p>
+        </div>
+        <button class="btn btn-sm btn-outline" onclick="showToast('Readiness Checklist: 1. Clean Pan 2. Center Bubble 3. Power Cable OK 4. Zero Key Calibrated', 'info')">View Checklist</button>
+      </div>
+
+      <!-- Main Table -->
+      <div class="card mb-4">
+        <div class="card-header border-b">
+          <h3 class="card-title">Registered Instruments &amp; Lifecycle Trackers</h3>
+          <div class="search-box">
+            <input type="text" class="search-input" id="instSearch" placeholder="Search IDI, Serial, Category..." oninput="renderOwnerInstruments()" />
+          </div>
+        </div>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Instrument Digital ID (IDI)</th>
+                <th>Category / Description</th>
+                <th>Serial No</th>
+                <th>Status</th>
+                <th>Expiry Date</th>
+                <th>Certificate</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="ownerInstTable">
+              <!-- Populated via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Submitted Applications Tracker -->
+      <div class="card">
+        <div class="card-header border-b">
+          <h3 class="card-title">Verification Applications Tracker</h3>
+        </div>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Application Ref</th>
+                <th>IDI Reference</th>
+                <th>Category</th>
+                <th>Submitted Date</th>
+                <th>Preferred Date</th>
+                <th>Fee Paid</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="ownerAppTable">
+              <!-- Populated via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Apply Verification Modal -->
+  <div class="modal-overlay" id="applyModalOverlay">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 class="modal-title">New Verification / Re-Verification Application</h3>
+        <button class="modal-close" onclick="closeApplyModal()">✕</button>
+      </div>
+      <form onsubmit="handleApplySubmit(event)">
+        <div class="modal-body" style="padding:16px 0;">
+          <div class="form-group">
+            <label class="form-label">Instrument Category</label>
+            <select class="form-select" id="appCategory" onchange="updateFeeEstimate()" required>
+              <option value="Electronic Weighing Scale (Class III)">Electronic Weighing Scale (Class III)</option>
+              <option value="Fuel Dispensing Pump (Multi-Nozzle)">Fuel Dispensing Pump (Multi-Nozzle)</option>
+              <option value="Pitless Heavy Weighbridge (50 Tonnes)">Pitless Heavy Weighbridge (50 Tonnes)</option>
+              <option value="Industrial Liquid Flow Meter">Industrial Liquid Flow Meter</option>
+              <option value="Mechanical Spring Balance">Mechanical Spring Balance</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Brand &amp; Model</label>
+              <input type="text" class="form-input" id="appModel" placeholder="e.g. Avery India 500" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Serial Number</label>
+              <input type="text" class="form-input" id="appSerial" placeholder="e.g. SN-2026-991" required />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Capacity / Max Load (kg/L)</label>
+              <input type="number" class="form-input" id="appCapacity" placeholder="e.g. 30" value="30" oninput="updateFeeEstimate()" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Preferred Inspection Date</label>
+              <input type="date" class="form-input" id="appDate" required />
+            </div>
+          </div>
+
+          <div style="background:var(--bg-secondary); padding:14px; border-radius:10px; border-left:4px solid var(--primary); margin-bottom:15px;">
+            <div style="font-size:12px; color:var(--text-muted);">Standardized Legal Metrology Fee:</div>
+            <div style="font-size:22px; font-weight:800; color:var(--primary);" id="feeDisplay">₹500.00</div>
+            <div style="font-size:11px; color:var(--text-muted);">Calculated automatically under Legal Metrology Fee Rules.</div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Upload Equipment Self-Check Photo / Spec Document</label>
+            <input type="file" class="form-input" accept="image/*,.pdf" />
+          </div>
+        </div>
+        <div style="display:flex; justify-content:flex-end; gap:12px; margin-top:16px;">
+          <button type="button" class="btn btn-outline" onclick="closeApplyModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary">Pay Fee &amp; Submit Application</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="nav-logo">
+            <div class="logo-icon">M<span>360</span></div>
+            <div class="logo-text"><span class="logo-name">Metro360</span><span class="logo-sub">by EvolveVI</span></div>
+          </div>
+          <p>Unified Digital Verification System for Weighing &amp; Measuring Instruments under Legal Metrology.</p>
+          <div class="footer-badge">SIH 2026 &middot; Problem ID: 26036</div>
+        </div>
+        <div class="footer-links">
+          <h4>Platform</h4>
+          <a href="login.html">Login</a>
+          <a href="register.html">Register</a>
+          <a href="verify.html">Verify Instrument</a>
+          <a href="consumer.html">Consumer Portal</a>
+        </div>
+        <div class="footer-links">
+          <h4>Dashboards</h4>
+          <a href="owner.html">Owner Portal</a>
+          <a href="lmo.html">LMO Portal</a>
+          <a href="gatc.html">GATC Portal</a>
+          <a href="manufacturer.html">Manufacturer Portal</a>
+          <a href="admin.html">Admin Portal</a>
+        </div>
+        <div class="footer-links">
+          <h4>Info</h4>
+          <a href="about.html">Legal Metrology Act 2009</a>
+          <a href="about.html">LM General Rules 2011</a>
+          <a href="about.html">GATC Rules 2013</a>
+          <a href="about.html">About</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Metro360 by EvolveVI &mdash; Smart India Hackathon 2026</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      renderOwnerDashboard();
+      document.getElementById('appDate').valueAsDate = new Date(Date.now() + 86400000 * 3);
+    });
+
+    function renderOwnerDashboard() {
+      const db = getDB();
+      const user = getCurrentUser() || db.users[0];
+      document.getElementById('ownerTitle').innerText = user.name;
+      if (user.gstin) document.getElementById('ownerGST').innerText = user.gstin;
+
+      renderOwnerInstruments();
+      renderOwnerApplications();
+    }
+
+    function renderOwnerInstruments() {
+      const db = getDB();
+      const query = document.getElementById('instSearch').value.toLowerCase();
+      const tbody = document.getElementById('ownerInstTable');
+      tbody.innerHTML = '';
+
+      let count = 0, verified = 0, expiring = 0, expired = 0;
+
+      db.instruments.forEach(inst => {
+        count++;
+        if (inst.status === 'Verified') verified++;
+        else if (inst.status === 'Expiring Soon') expiring++;
+        else expired++;
+
+        if (query && !inst.idi.toLowerCase().includes(query) && !inst.category.toLowerCase().includes(query) && !inst.serialNo.toLowerCase().includes(query)) return;
+
+        let badgeClass = 'badge-success';
+        if (inst.status === 'Expiring Soon') badgeClass = 'badge-warning';
+        if (inst.status === 'Expired' || inst.status === 'Pending Inspection') badgeClass = 'badge-error';
+
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><strong>${inst.idi}</strong></td>
+          <td>${inst.category}<br><small style="color:var(--text-muted);">${inst.brandModel}</small></td>
+          <td><code>${inst.serialNo}</code></td>
+          <td><span class="badge ${badgeClass}">${inst.status}</span></td>
+          <td>${inst.expiryDate}</td>
+          <td>${inst.certificateNo !== 'Pending' ? `<a href="#" onclick="openCertificateWindow('${inst.idi}'); return false;" style="color:var(--primary); font-weight:600;">📜 View Certificate</a>` : '<span style="color:var(--text-muted);">Awaiting Seal</span>'}</td>
+          <td>
+            <button class="btn btn-xs btn-outline" onclick="openCertificateWindow('${inst.idi}')">🖨️ Cert</button>
+            <button class="btn btn-xs btn-primary" onclick="openApplyModal('${inst.idi}')">🔄 Re-Verify</button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      document.getElementById('statTotal').innerText = count;
+      document.getElementById('statVerified').innerText = verified;
+      document.getElementById('statExpiring').innerText = expiring;
+      document.getElementById('statExpired').innerText = expired;
+    }
+
+    function renderOwnerApplications() {
+      const db = getDB();
+      const tbody = document.getElementById('ownerAppTable');
+      tbody.innerHTML = '';
+
+      db.applications.forEach(app => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><code>${app.appId}</code></td>
+          <td><strong>${app.idi}</strong></td>
+          <td>${app.category}</td>
+          <td>${app.submittedDate}</td>
+          <td>${app.preferredDate}</td>
+          <td>₹${app.feePaid}</td>
+          <td><span class="badge badge-info">${app.status}</span></td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function updateFeeEstimate() {
+      const cat = document.getElementById('appCategory').value;
+      const cap = parseFloat(document.getElementById('appCapacity').value) || 30;
+      const fee = calculateLegalMetrologyFee(cat, cap);
+      document.getElementById('feeDisplay').innerText = `₹${fee}.00`;
+    }
+
+    function openApplyModal(prefillIdi = '') {
+      document.getElementById('applyModalOverlay').classList.add('open');
+      updateFeeEstimate();
+    }
+
+    function closeApplyModal() {
+      document.getElementById('applyModalOverlay').classList.remove('open');
+    }
+
+    function handleApplySubmit(e) {
+      e.preventDefault();
+      const db = getDB();
+      const cat = document.getElementById('appCategory').value;
+      const model = document.getElementById('appModel').value;
+      const serial = document.getElementById('appSerial').value;
+      const cap = document.getElementById('appCapacity').value;
+      const date = document.getElementById('appDate').value;
+
+      const newIdi = `IDI-2026-WM-${Math.floor(1000 + Math.random() * 9000)}`;
+      const fee = calculateLegalMetrologyFee(cat, parseFloat(cap));
+
+      const newInst = {
+        idi: newIdi,
+        serialNo: serial,
+        category: cat,
+        brandModel: model,
+        ownerName: getCurrentUser() ? getCurrentUser().name : 'Rajesh Traders Pvt Ltd',
+        gstin: '07AAAAA0000A1Z5',
+        address: 'Khan Market, New Delhi',
+        district: 'New Delhi',
+        status: 'Pending Inspection',
+        verificationDate: '-',
+        expiryDate: '-',
+        certificateNo: 'Pending',
+        lmoName: 'Officer V. K. Sharma',
+        lmoId: 'LMO-DL-402',
+        stampDetails: 'Awaiting Physical Inspection',
+        maxCapacity: cap + ' kg',
+        minCapacity: '100 g',
+        verificationFee: fee,
+        qrPayload: `https://metro360.gov.in/verify?idi=${newIdi}`
+      };
+
+      const newApp = {
+        appId: `APP-2026-${Math.floor(1000 + Math.random() * 9000)}`,
+        idi: newIdi,
+        ownerName: newInst.ownerName,
+        category: cat,
+        submittedDate: new Date().toISOString().split('T')[0],
+        preferredDate: date,
+        status: 'Scheduled',
+        assignedOfficer: 'Officer V. K. Sharma',
+        feePaid: fee,
+        paymentRef: `PAY-ONLINE-${Date.now().toString().slice(-6)}`,
+        readinessCheck: 'Passed'
+      };
+
+      db.instruments.unshift(newInst);
+      db.applications.unshift(newApp);
+      saveDB(db);
+
+      closeApplyModal();
+      showToast(`Application ${newApp.appId} created & fee ₹${fee} paid! IDI: ${newIdi}`, 'success');
+      renderOwnerDashboard();
+    }
+  </script>
+</body>
+</html>

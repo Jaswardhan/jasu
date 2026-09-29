@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <title>Manufacturer &amp; Importer Portal — Metro360</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+  
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo">
+        <div class="logo-icon">M<span>360</span></div>
+        <div class="logo-text">
+          <span class="logo-name">Metro360</span>
+          <span class="logo-sub">by EvolveVI</span>
+        </div>
+      </a>
+      <div class="nav-links">
+        <a href="../index.html" class="nav-link">Home</a>
+        <a href="verify.html" class="nav-link ">Verify QR</a>
+        <a href="consumer.html" class="nav-link ">Consumer Portal</a>
+        <a href="about.html" class="nav-link ">About</a>
+      </div>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" title="Toggle theme"><span class="theme-icon">🌙</span></button>
+        <a href="login.html" class="btn btn-outline">Login</a>
+        <a href="register.html" class="btn btn-primary">Register</a>
+      </div>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="../index.html" class="mobile-link">Home</a>
+      <a href="verify.html" class="mobile-link">Verify QR</a>
+      <a href="consumer.html" class="mobile-link">Consumer Portal</a>
+      <a href="about.html" class="mobile-link">About</a>
+      <a href="login.html" class="mobile-link">Login</a>
+      <a href="register.html" class="mobile-link">Register</a>
+    </div>
+  </nav>
+
+
+  <div class="dashboard-layout">
+    <div class="container">
+      <div class="dashboard-header">
+        <div>
+          <span class="badge badge-primary">Manufacturer &amp; Importer Portal</span>
+          <h1>Essae-Teraoka Electronics Ltd</h1>
+          <p>License: MFR-LM-2024-88 &middot; Central Model Approval Registry</p>
+        </div>
+        <div class="header-actions">
+          <button class="btn btn-primary" onclick="openModelModal()">+ Apply Model Approval</button>
+          <button class="btn btn-outline" onclick="openBulkModal()">📥 Bulk Registration API/Upload</button>
+        </div>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-header border-b">
+          <h3>📦 Model Approval Tracking &amp; Central Registry</h3>
+        </div>
+        <div class="card-body p-0">
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Model ID</th>
+                  <th>Model Name / Specification</th>
+                  <th>Category</th>
+                  <th>Submitted Date</th>
+                  <th>Status</th>
+                  <th>Approval Cert No</th>
+                </tr>
+              </thead>
+              <tbody id="mfrModelTable">
+                <!-- JS Populated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Multi-State Compliance Dashboard -->
+      <div class="card">
+        <div class="card-header border-b">
+          <h3>🗺️ Multi-State Compliance &amp; Batch Initial Verification Dashboard</h3>
+        </div>
+        <div class="card-body">
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="sc-title">Delhi Circle</div>
+              <div class="sc-value" style="font-size:20px; color:var(--success);">100% Compliant</div>
+              <div class="sc-sub">250 Units Batch Verified</div>
+            </div>
+            <div class="stat-card">
+              <div class="sc-title">Karnataka Circle</div>
+              <div class="sc-value" style="font-size:20px; color:var(--success);">100% Compliant</div>
+              <div class="sc-sub">400 Units Batch Verified</div>
+            </div>
+            <div class="stat-card">
+              <div class="sc-title">Maharashtra Circle</div>
+              <div class="sc-value" style="font-size:20px; color:var(--warning);">Batch In Stamping</div>
+              <div class="sc-sub">120 Units Assigned to LMO</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Model Approval Modal -->
+  <div class="modal-overlay" id="modelModalOverlay">
+    <div class="modal" id="modelModal">
+      <div class="modal-header">
+        <h3 class="modal-title">Submit Model Approval Application</h3>
+        <button class="modal-close" onclick="closeModelModal()">✕</button>
+      </div>
+      <form onsubmit="handleModelSubmit(event)">
+        <div class="modal-body" style="padding: 16px 0;">
+          <div class="form-group">
+            <label class="form-label">Model Name &amp; Series</label>
+            <input type="text" class="form-input" id="maName" placeholder="e.g. Essae DS-300 Series Scale" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Category</label>
+            <select class="form-select" id="maCat">
+              <option>Class II High Precision Balance</option>
+              <option>Class III Commercial Weighing Scale</option>
+              <option>Mass Flow Controller</option>
+              <option>Automatic Gravimetric Filling Instrument</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Upload Technical Drawings &amp; NABL Test Reports</label>
+            <input type="file" class="form-input" required />
+          </div>
+        </div>
+        <div style="display:flex; justify-content:flex-end; gap:12px; margin-top:16px;">
+          <button type="button" class="btn btn-outline" onclick="closeModelModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary">Submit Application</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+  
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="nav-logo">
+            <div class="logo-icon">M<span>360</span></div>
+            <div class="logo-text"><span class="logo-name">Metro360</span><span class="logo-sub">by EvolveVI</span></div>
+          </div>
+          <p>Unified Digital Verification System for Weighing &amp; Measuring Instruments under Legal Metrology.</p>
+          <div class="footer-badge">SIH 2026 &middot; Problem ID: 26036</div>
+        </div>
+        <div class="footer-col">
+          <h4>Stakeholder Portals</h4>
+          <ul>
+            <li><a href="owner.html">Trader / Owner Portal</a></li>
+            <li><a href="lmo.html">Legal Metrology Officer (LMO)</a></li>
+            <li><a href="gatc.html">GATC &amp; Repairer Hub</a></li>
+            <li><a href="manufacturer.html">Manufacturer / Importer</a></li>
+            <li><a href="admin.html">Directorate Admin Center</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Public Services</h4>
+          <ul>
+            <li><a href="verify.html">Instant QR Verification</a></li>
+            <li><a href="consumer.html">Consumer Complaint Portal</a></li>
+            <li><a href="consumer.html#track">Track Complaint Status</a></li>
+            <li><a href="about.html">Legal Metrology Act 2009</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Metro360 &middot; Team EvolveVI &middot; Smart India Hackathon 2026</p>
+      </div>
+    </div>
+  </footer>
+  <script src="../js/data.js"></script>
+  <script src="../js/app.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      renderMfrDashboard();
+    });
+
+    function renderMfrDashboard() {
+      const db = getDB();
+      const tbody = document.getElementById('mfrModelTable');
+      tbody.innerHTML = '';
+      db.modelApprovals.forEach(m => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><code>${m.modelId}</code></td>
+          <td><strong>${m.modelName}</strong></td>
+          <td>${m.category}</td>
+          <td>${m.submittedDate}</td>
+          <td><span class="badge ${m.status==='Approved' ? 'badge-success' : 'badge-warning'}">${m.status}</span></td>
+          <td>${m.certificateNo}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function openModelModal() { document.getElementById('modelModalOverlay').classList.add('open'); }
+    function closeModelModal() { document.getElementById('modelModalOverlay').classList.remove('open'); }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const overlay = document.getElementById('modelModalOverlay');
+      if (overlay) {
+        overlay.addEventListener('click', (e) => {
+          if (e.target === overlay) closeModelModal();
+        });
+      }
+    });
+
+    function handleModelSubmit(e) {
+      e.preventDefault();
+      const db = getDB();
+      const newMa = {
+        modelId: `MA-2026-${Math.floor(100 + Math.random() * 900)}`,
+        mfrName: 'Essae-Teraoka Electronics Ltd',
+        modelName: document.getElementById('maName').value,
+        category: document.getElementById('maCat').value,
+        submittedDate: new Date().toISOString().split('T')[0],
+        status: 'Under Scrutiny',
+        certificateNo: 'In Process',
+        approvalDate: '-',
+        documents: ['Spec Sheet.pdf']
+      };
+      db.modelApprovals.unshift(newMa);
+      saveDB(db);
+      closeModelModal();
+      showToast(`Model Approval Application ${newMa.modelId} submitted!`, 'success');
+      renderMfrDashboard();
+    }
+
+    function openBulkModal() {
+      showToast('Simulated Batch Bulk Upload: 50 Instrument IDIs registered automatically!', 'success');
+    }
+  </script>
+</body>
+</html>

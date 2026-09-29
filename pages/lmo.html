@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LMO Officer Portal — Metro360</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo">
+        <div class="logo-icon">M<span>360</span></div>
+        <div class="logo-text">
+          <span class="logo-name">Metro360</span>
+          <span class="logo-sub">by EvolveVI</span>
+        </div>
+      </a>
+      <div class="nav-links">
+        <a href="../index.html" class="nav-link">Home</a>
+        <a href="verify.html" class="nav-link">Verify QR</a>
+        <a href="consumer.html" class="nav-link">Consumer Portal</a>
+        <a href="about.html" class="nav-link">About</a>
+      </div>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" title="Toggle theme"><span class="theme-icon">🌙</span></button>
+        <a href="login.html" class="btn btn-outline">Login</a>
+        <a href="register.html" class="btn btn-primary">Register</a>
+      </div>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="../index.html" class="mobile-link">Home</a>
+      <a href="verify.html" class="mobile-link">Verify QR</a>
+      <a href="consumer.html" class="mobile-link">Consumer Portal</a>
+      <a href="about.html" class="mobile-link">About</a>
+      <a href="login.html" class="mobile-link">Login</a>
+      <a href="register.html" class="mobile-link">Register</a>
+    </div>
+  </nav>
+
+  <div class="dashboard-layout" style="padding-top:100px; padding-bottom:60px;">
+    <div class="container">
+      <div class="dash-header">
+        <div>
+          <span class="badge badge-warning">Legal Metrology Officer (LMO) Desk</span>
+          <h1 class="dash-title">Officer V. K. Sharma (LMO-DL-402)</h1>
+          <p class="dash-subtitle">Jurisdiction: New Delhi Central Circle &middot; Directorate of Legal Metrology</p>
+        </div>
+        <div class="dash-actions">
+          <span class="badge badge-success">● Field Station Active</span>
+        </div>
+      </div>
+
+      <!-- Smart Area-Based Route Optimizing Banner -->
+      <div class="info-box mb-4" style="background: linear-gradient(135deg, rgba(37,99,235,0.15), rgba(16,185,129,0.1)); border:1px solid var(--primary); display:flex; align-items:center; gap:16px; flex-wrap:wrap;">
+        <div style="font-size:2rem;">🗺️</div>
+        <div style="flex:1;">
+          <h4 style="font-weight:700; margin-bottom:4px;">Smart Area-Based Inspection Route Optimizer</h4>
+          <p style="color:var(--text-secondary); font-size:0.88rem;">3 inspection appointments grouped in <strong>Khan Market / Ring Road Cluster</strong>. Optimizing field travel distance reduces LMO response time by 45%.</p>
+        </div>
+        <button class="btn btn-sm btn-primary" onclick="showToast('Optimized route map loaded for Khan Market Cluster', 'success')">Optimize Field Route</button>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-header border-b">
+          <h3 class="card-title">Assigned Inspection Applications &amp; Scrutiny Queue</h3>
+        </div>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>IDI</th>
+                <th>Category</th>
+                <th>Owner / Trader</th>
+                <th>Scheduled Date</th>
+                <th>Readiness Check</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="lmoAppTable">
+              <!-- JS populated -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Automated Inspection & Calculation Engine Module -->
+      <div class="card">
+        <div class="card-header border-b">
+          <div>
+            <h3 class="card-title">🔬 Field Inspection &amp; Automated Calculation Engine</h3>
+            <span style="font-size:12px; color:var(--text-muted);">Legal Metrology (General Rules 2011 Schedule VI Compliance Calculator)</span>
+          </div>
+        </div>
+        <div>
+          <form onsubmit="handleInspectionCalc(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Select Instrument IDI</label>
+                <select class="form-select" id="calcIdi" onchange="populateCalcFields()">
+                  <option value="IDI-2026-WM-8841">IDI-2026-WM-8841 (Electronic Weighing Scale)</option>
+                  <option value="IDI-2026-WM-9902">IDI-2026-WM-9902 (Fuel Dispensing Pump)</option>
+                  <option value="IDI-2026-WM-1045">IDI-2026-WM-1045 (Weighbridge 50T)</option>
+                  <option value="IDI-2026-WM-3310">IDI-2026-WM-3310 (Liquid Flow Meter)</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Category</label>
+                <input type="text" class="form-input" id="calcCat" readonly value="Electronic Weighing Scale (Class III)" />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Standard Reference Weight / Nominal Value (e.g. 10000g or 10L)</label>
+                <input type="number" step="0.001" class="form-input" id="calcNominal" placeholder="10000" value="10000" required oninput="runLiveCalc()" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Observed Reading on Instrument</label>
+                <input type="number" step="0.001" class="form-input" id="calcObserved" placeholder="10002" value="10002" required oninput="runLiveCalc()" />
+              </div>
+            </div>
+
+            <div id="calcResultBox" style="background:var(--bg-secondary); padding:16px; border-radius:10px; border:2px solid var(--primary); margin:15px 0;">
+              <!-- Live calc result output -->
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Official Government Lead/Digital Seal Number Issued</label>
+              <input type="text" class="form-input" id="calcSeal" value="DL-402-2026-A" required />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">LMO Inspection Remarks</label>
+              <textarea class="form-input" id="calcRemarks" rows="2">Inspected and verified according to Legal Metrology General Rules 2011 Schedule VI specifications. Stamp wire intact.</textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block form-submit">Approve Verification &amp; Issue Digital Certificate</button>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="nav-logo">
+            <div class="logo-icon">M<span>360</span></div>
+            <div class="logo-text"><span class="logo-name">Metro360</span><span class="logo-sub">by EvolveVI</span></div>
+          </div>
+          <p>Unified Digital Verification System for Weighing &amp; Measuring Instruments under Legal Metrology.</p>
+          <div class="footer-badge">SIH 2026 &middot; Problem ID: 26036</div>
+        </div>
+        <div class="footer-links">
+          <h4>Platform</h4>
+          <a href="login.html">Login</a>
+          <a href="register.html">Register</a>
+          <a href="verify.html">Verify Instrument</a>
+          <a href="consumer.html">Consumer Portal</a>
+        </div>
+        <div class="footer-links">
+          <h4>Dashboards</h4>
+          <a href="owner.html">Owner Portal</a>
+          <a href="lmo.html">LMO Portal</a>
+          <a href="gatc.html">GATC Portal</a>
+          <a href="manufacturer.html">Manufacturer Portal</a>
+          <a href="admin.html">Admin Portal</a>
+        </div>
+        <div class="footer-links">
+          <h4>Info</h4>
+          <a href="about.html">Legal Metrology Act 2009</a>
+          <a href="about.html">LM General Rules 2011</a>
+          <a href="about.html">GATC Rules 2013</a>
+          <a href="about.html">About</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Metro360 by EvolveVI &mdash; Smart India Hackathon 2026</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      renderLmoDashboard();
+      runLiveCalc();
+    });
+
+    function renderLmoDashboard() {
+      const db = getDB();
+      const tbody = document.getElementById('lmoAppTable');
+      tbody.innerHTML = '';
+
+      db.instruments.forEach(inst => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><strong>${inst.idi}</strong></td>
+          <td>${inst.category}</td>
+          <td>${inst.ownerName}</td>
+          <td>${inst.verificationDate !== '-' ? inst.verificationDate : '2026-09-30'}</td>
+          <td><span class="badge badge-success">OK (Pre-Check 100%)</span></td>
+          <td>
+            <button class="btn btn-xs btn-primary" onclick="selectIdiForCalc('${inst.idi}')">⚡ Inspect &amp; Calculate</button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function selectIdiForCalc(idi) {
+      document.getElementById('calcIdi').value = idi;
+      populateCalcFields();
+      runLiveCalc();
+      window.scrollTo({ top: document.getElementById('calcResultBox').offsetTop - 100, behavior: 'smooth' });
+    }
+
+    function populateCalcFields() {
+      const db = getDB();
+      const idi = document.getElementById('calcIdi').value;
+      const inst = db.instruments.find(i => i.idi === idi);
+      if (inst) {
+        document.getElementById('calcCat').value = inst.category;
+      }
+    }
+
+    function runLiveCalc() {
+      const nom = parseFloat(document.getElementById('calcNominal').value);
+      const obs = parseFloat(document.getElementById('calcObserved').value);
+      const cat = document.getElementById('calcCat').value;
+
+      const res = runVerificationCalculation(nom, obs, cat);
+      const box = document.getElementById('calcResultBox');
+
+      if (!res) {
+        box.innerHTML = `<p style="color:var(--text-muted);">Enter nominal and observed values to compute Legal Metrology compliance error.</p>`;
+        return;
+      }
+
+      const color = res.isCompliant ? 'var(--success)' : 'var(--accent)';
+
+      box.innerHTML = `
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+          <div>
+            <div style="font-size:12px; color:var(--text-muted);">Absolute Error:</div>
+            <div style="font-size:22px; font-weight:800; color:${color};">${res.error} units (${res.errorPercent}%)</div>
+          </div>
+          <div>
+            <div style="font-size:12px; color:var(--text-muted);">Max Permissible Error (MPE):</div>
+            <div style="font-size:18px; font-weight:700;">± ${res.mpeAllowed} units</div>
+          </div>
+          <div>
+            <span class="badge ${res.isCompliant ? 'badge-success' : 'badge-error'}" style="font-size:13px; padding:6px 12px;">${res.verdict}</span>
+          </div>
+        </div>
+      `;
+    }
+
+    function handleInspectionCalc(e) {
+      e.preventDefault();
+      const db = getDB();
+      const idi = document.getElementById('calcIdi').value;
+      const nom = document.getElementById('calcNominal').value;
+      const obs = document.getElementById('calcObserved').value;
+      const seal = document.getElementById('calcSeal').value;
+      const remarks = document.getElementById('calcRemarks').value;
+
+      const inst = db.instruments.find(i => i.idi === idi);
+      if (inst) {
+        const today = new Date().toISOString().split('T')[0];
+        const expiry = new Date(Date.now() + 365 * 86400000).toISOString().split('T')[0];
+
+        inst.status = 'Verified';
+        inst.verificationDate = today;
+        inst.expiryDate = expiry;
+        inst.certificateNo = `CERT-LM-2026-${Math.floor(10000 + Math.random() * 90000)}`;
+        inst.stampDetails = `Government Seal #${seal}`;
+
+        const newInsp = {
+          inspectionId: `INSP-2026-${Math.floor(100 + Math.random() * 900)}`,
+          idi: idi,
+          lmoName: 'Officer V. K. Sharma',
+          date: today,
+          nominalValue: nom,
+          observedReading: obs,
+          errorVal: (obs - nom).toFixed(3),
+          mpeAllowed: '± 5 g',
+          result: 'PASS - COMPLIANT',
+          stampedSealNo: seal,
+          remarks: remarks
+        };
+
+        db.inspections.unshift(newInsp);
+        saveDB(db);
+
+        showToast(`Verification Approved for ${idi}! Certificate ${inst.certificateNo} generated.`, 'success');
+        renderLmoDashboard();
+        setTimeout(() => openCertificateWindow(idi), 800);
+      }
+    }
+  </script>
+</body>
+</html>

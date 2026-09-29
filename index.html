@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Metro360 — Online Verification System for Weighing & Measuring Instruments</title>
+  <meta name="description" content="Metro360 by EvolveVI — Unified Digital Verification System for Weighing & Measuring Instruments under Legal Metrology." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <div class="logo-icon">M<span>360</span></div>
+        <div class="logo-text">
+          <span class="logo-name">Metro360</span>
+          <span class="logo-sub">by EvolveVI</span>
+        </div>
+      </a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link active">Home</a>
+        <a href="pages/verify.html" class="nav-link">Verify QR</a>
+        <a href="pages/consumer.html" class="nav-link">Consumer</a>
+        <a href="pages/about.html" class="nav-link">About</a>
+      </div>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" title="Toggle theme"><span class="theme-icon">🌙</span></button>
+        <a href="pages/login.html" class="btn btn-outline">Login</a>
+        <a href="pages/register.html" class="btn btn-primary">Register</a>
+      </div>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="index.html" class="mobile-link">Home</a>
+      <a href="pages/verify.html" class="mobile-link">Verify QR</a>
+      <a href="pages/consumer.html" class="mobile-link">Consumer</a>
+      <a href="pages/about.html" class="mobile-link">About</a>
+      <a href="pages/login.html" class="mobile-link">Login</a>
+      <a href="pages/register.html" class="mobile-link">Register</a>
+    </div>
+  </nav>
+
+  <section class="hero" id="hero">
+    <div class="hero-bg">
+      <div class="hero-orb orb-1"></div>
+      <div class="hero-orb orb-2"></div>
+      <div class="hero-orb orb-3"></div>
+      <div class="grid-overlay"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-badge animate-in">
+        <span class="badge-dot"></span>
+        Smart India Hackathon 2026 &middot; Problem ID: 26036
+      </div>
+      <h1 class="hero-title animate-in delay-1">
+        One Instrument.<br />
+        <span class="gradient-text">One Digital Identity.</span><br />
+        Complete Lifecycle.
+      </h1>
+      <p class="hero-desc animate-in delay-2">
+        Metro360 digitizes the entire verification and certification workflow for weighing &amp; measuring instruments under Legal Metrology — from registration to QR-based public authentication.
+      </p>
+      <div class="hero-cta animate-in delay-3">
+        <a href="pages/login.html" class="btn btn-primary btn-lg">Get Started</a>
+        <a href="pages/verify.html" class="btn btn-outline btn-lg">🔍 Verify Instrument</a>
+      </div>
+      <div class="hero-stats animate-in delay-4">
+        <div class="stat"><span class="stat-num" data-target="6">0</span><span class="stat-label">Stakeholder Roles</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><span class="stat-num" data-target="100">0</span><span class="stat-label">% Paperless</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><span class="stat-num" data-target="360">0</span><span class="stat-label">° Coverage</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><span class="stat-num" data-target="9">0</span><span class="stat-label">Core Modules</span></div>
+      </div>
+    </div>
+    <div class="hero-scroll"><span>Scroll to explore</span><div class="scroll-arrow"></div></div>
+  </section>
+
+  <section class="section problem-section" id="problem">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">The Challenge</span>
+        <h2 class="section-title">Why Metro360?</h2>
+        <p class="section-desc">Verification handled through physical forms, manual processes and office visits leads to systemic inefficiencies.</p>
+      </div>
+      <div class="problem-grid">
+        <div class="problem-card"><div class="problem-icon">📋</div><h3>Paper-Based Processes</h3><p>Complex paper applications and mandatory physical office visits create delays and inefficiency.</p></div>
+        <div class="problem-card"><div class="problem-icon">⏰</div><h3>Missed Deadlines</h3><p>No automated tracking leads to missed re-verification deadlines and compliance failures.</p></div>
+        <div class="problem-card"><div class="problem-icon">🔀</div><h3>Duplicate Records</h3><p>Inconsistent business/entity information causes duplicate records across isolated systems.</p></div>
+        <div class="problem-card"><div class="problem-icon">🔍</div><h3>No Consumer Verification</h3><p>Consumers lack an easy way to verify instrument authenticity or track complaints.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bento-section" id="features">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Next-Gen Architecture</span>
+        <h2 class="section-title">Metro360 Bento Feature Matrix</h2>
+        <p class="section-desc">Powered by Instrument Digital Identity (IDI), real-time rule calculations, and nationwide Legal Metrology network.</p>
+      </div>
+
+      <div class="bento-grid">
+        <!-- 1. India Network Map (Tall 2x2) -->
+        <div class="bento-card col-span-2 row-span-2">
+          <div class="india-map-container">
+            <svg class="india-svg" viewBox="0 0 300 380" fill="currentColor">
+              <path d="M145 10 L165 25 L180 45 L205 55 L220 80 L245 100 L235 125 L255 145 L240 170 L250 195 L230 215 L225 245 L205 270 L190 300 L175 335 L155 365 L140 340 L125 315 L105 290 L90 260 L70 235 L55 205 L65 180 L45 155 L60 130 L55 105 L75 85 L95 65 L105 40 L125 30 Z" />
+            </svg>
+            <div class="node-pulse node-delhi" title="Delhi Circle HQ"></div>
+            <div class="node-pulse node-mumbai" title="Mumbai Circle"></div>
+            <div class="node-pulse node-bengaluru" title="Bengaluru Hub"></div>
+            <div class="node-pulse node-hyderabad" title="Hyderabad Lab"></div>
+            <div class="node-pulse node-chennai" title="Chennai Circle"></div>
+            <div class="node-pulse node-kolkata" title="Kolkata Station"></div>
+            <div class="node-pulse node-ahmedabad" title="Ahmedabad Office"></div>
+          </div>
+          <div>
+            <div class="bento-card-title">🗺️ National India Metrology Network</div>
+            <div class="bento-card-desc">Real-time sync across State Legal Metrology Directorates, GATC labs, and district field stations.</div>
+          </div>
+        </div>
+
+        <!-- 2. Type Scale (Standard 2x1) -->
+        <div class="bento-card col-span-2">
+          <div class="type-tester">
+            <div class="type-tester-text">IDI</div>
+          </div>
+          <div>
+            <div class="bento-card-title">🆔 Universal Instrument Identity</div>
+            <div class="bento-card-desc">One unique ID per instrument connecting owner, LMO, GATC, and consumer.</div>
+          </div>
+        </div>
+
+        <!-- 3. Speed Indicator (Standard 2x1) -->
+        <div class="bento-card col-span-2">
+          <div class="speed-indicator">
+            <div class="speed-val">100ms</div>
+            <div class="speed-bar-container">
+              <div class="speed-bar-fill"></div>
+            </div>
+          </div>
+          <div>
+            <div class="bento-card-title">⚡ Instant Rule Calculation Engine</div>
+            <div class="bento-card-desc">Automated MPE check &amp; Legal Metrology Fee calculation under General Rules 2011.</div>
+          </div>
+        </div>
+
+        <!-- 4. Security Badge (Wide 3x1) -->
+        <div class="bento-card col-span-3">
+          <div class="security-shields">
+            <div class="shield-box active">🔒</div>
+            <div class="shield-box active">🛡️</div>
+            <div class="shield-box active">📜</div>
+          </div>
+          <div>
+            <div class="bento-card-title">🔐 Tamper-Evident Audit Trail &amp; QR Seals</div>
+            <div class="bento-card-desc">Server-authenticated digital certificates preventing fake QR seals or unauthorized record edits.</div>
+          </div>
+        </div>
+
+        <!-- 5. Mobile Ready (Wide 3x1) -->
+        <div class="bento-card col-span-3">
+          <div style="display:flex; justify-content:center; align-items:center; height:100%; font-size:3.5rem;">
+            📱
+          </div>
+          <div>
+            <div class="bento-card-title">📱 Public QR Scanner &amp; Complaint Portal</div>
+            <div class="bento-card-desc">Instant consumer verification and direct complaint reporting for fair trade protection.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section workflow-section" id="workflow">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">The Solution</span>
+        <h2 class="section-title">End-to-End Digital Workflow</h2>
+        <p class="section-desc">A unified platform connecting all six stakeholders through a single instrument digital identity.</p>
+      </div>
+      <div class="workflow-steps">
+        <div class="workflow-step"><div class="step-num">01</div><div class="step-icon">📝</div><h3>Register Instrument</h3><p>Owner/Manufacturer registers instrument digitally with all specifications.</p></div>
+        <div class="workflow-arrow">&#8594;</div>
+        <div class="workflow-step"><div class="step-num">02</div><div class="step-icon">📅</div><h3>Schedule Verification</h3><p>Smart area-based scheduling assigns the nearest LMO automatically.</p></div>
+        <div class="workflow-arrow">&#8594;</div>
+        <div class="workflow-step"><div class="step-num">03</div><div class="step-icon">🔬</div><h3>Inspect &amp; Certify</h3><p>LMO conducts digital inspection with automated verification calculations.</p></div>
+        <div class="workflow-arrow">&#8594;</div>
+        <div class="workflow-step"><div class="step-num">04</div><div class="step-icon">📜</div><h3>Digital Certificate</h3><p>Official certificate generated and linked to the instrument digital identity.</p></div>
+        <div class="workflow-arrow">&#8594;</div>
+        <div class="workflow-step"><div class="step-num">05</div><div class="step-icon">📱</div><h3>QR Verification</h3><p>Consumers scan QR code to instantly verify authenticity and validity.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section stakeholders-section" id="stakeholders">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Stakeholders</span>
+        <h2 class="section-title">6 Connected Roles</h2>
+        <p class="section-desc">Every stakeholder gets a dedicated dashboard with role-specific features and permissions.</p>
+      </div>
+      <div class="stakeholder-grid">
+        <a href="pages/owner.html" class="stakeholder-card" data-role="owner">
+          <div class="sc-icon">🏪</div><h3>Owner / Trader</h3><p>Apply for verification, track status, manage deadlines and online payments.</p>
+          <div class="sc-features"><span>Digital Applications</span><span>Deadline Tracker</span><span>Fee Calculator</span></div>
+          <div class="sc-cta">Access Dashboard &#8594;</div>
+        </a>
+        <a href="pages/lmo.html" class="stakeholder-card" data-role="lmo">
+          <div class="sc-icon">👮</div><h3>Legal Metrology Officer</h3><p>Smart scheduling, digital inspection forms, automated calculation engine.</p>
+          <div class="sc-features"><span>Smart Scheduling</span><span>Inspection Forms</span><span>Auto Calculations</span></div>
+          <div class="sc-cta">Access Dashboard &#8594;</div>
+        </a>
+        <a href="pages/gatc.html" class="stakeholder-card" data-role="gatc">
+          <div class="sc-icon">🔧</div><h3>GATC / Repairer</h3><p>Digital testing workflow, standardized test reports, LMO coordination.</p>
+          <div class="sc-features"><span>Test Workflows</span><span>Digital Reports</span><span>Audit Records</span></div>
+          <div class="sc-cta">Access Dashboard &#8594;</div>
+        </a>
+        <a href="pages/manufacturer.html" class="stakeholder-card" data-role="manufacturer">
+          <div class="sc-icon">🏭</div><h3>Manufacturer / Importer</h3><p>Model approval, bulk registration, multi-state compliance dashboard.</p>
+          <div class="sc-features"><span>Model Approval</span><span>Bulk Registration</span><span>Compliance View</span></div>
+          <div class="sc-cta">Access Dashboard &#8594;</div>
+        </a>
+        <a href="pages/admin.html" class="stakeholder-card" data-role="directorate">
+          <div class="sc-icon">🏛️</div><h3>Directorate / Admin</h3><p>Real-time centralized dashboard, enforcement analytics, audit trail.</p>
+          <div class="sc-features"><span>Analytics</span><span>Enforcement</span><span>Audit Trail</span></div>
+          <div class="sc-cta">Access Dashboard &#8594;</div>
+        </a>
+        <a href="pages/consumer.html" class="stakeholder-card" data-role="consumer">
+          <div class="sc-icon">👤</div><h3>General Consumer</h3><p>QR scan verification, instrument status check, complaint filing and tracking.</p>
+          <div class="sc-features"><span>QR Scan</span><span>Complaint Portal</span><span>Track Status</span></div>
+          <div class="sc-cta">Verify Now &#8594;</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tech-section">
+    <div class="container">
+      <div class="section-header"><span class="section-tag">Technology</span><h2 class="section-title">Built on Modern Stack</h2></div>
+      <div class="tech-grid">
+        <div class="tech-item"><span class="tech-icon">💻</span><span>JavaScript + HTML/CSS</span></div>
+        <div class="tech-item"><span class="tech-icon">🟢</span><span>Node.js + Express.js</span></div>
+        <div class="tech-item"><span class="tech-icon">🐘</span><span>PostgreSQL</span></div>
+        <div class="tech-item"><span class="tech-icon">☁️</span><span>Supabase Storage</span></div>
+        <div class="tech-item"><span class="tech-icon">🔐</span><span>RBAC Auth</span></div>
+        <div class="tech-item"><span class="tech-icon">📱</span><span>QR Integration</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section cta-section">
+    <div class="container">
+      <div class="cta-box">
+        <div class="cta-orb"></div>
+        <h2>Ready to Go Digital?</h2>
+        <p>Join Metro360 and experience a fully paperless, transparent, and efficient verification ecosystem.</p>
+        <div class="cta-buttons">
+          <a href="pages/register.html" class="btn btn-primary btn-lg">Create Account</a>
+          <a href="pages/verify.html" class="btn btn-glass btn-lg">Verify an Instrument</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="nav-logo">
+            <div class="logo-icon">M<span>360</span></div>
+            <div class="logo-text"><span class="logo-name">Metro360</span><span class="logo-sub">by EvolveVI</span></div>
+          </div>
+          <p>Unified Digital Verification System for Weighing &amp; Measuring Instruments under Legal Metrology.</p>
+          <div class="footer-badge">SIH 2026 &middot; Problem ID: 26036</div>
+        </div>
+        <div class="footer-links">
+          <h4>Platform</h4>
+          <a href="pages/login.html">Login</a>
+          <a href="pages/register.html">Register</a>
+          <a href="pages/verify.html">Verify Instrument</a>
+          <a href="pages/consumer.html">Consumer Portal</a>
+        </div>
+        <div class="footer-links">
+          <h4>Dashboards</h4>
+          <a href="pages/owner.html">Owner Portal</a>
+          <a href="pages/lmo.html">LMO Portal</a>
+          <a href="pages/gatc.html">GATC Portal</a>
+          <a href="pages/manufacturer.html">Manufacturer Portal</a>
+          <a href="pages/admin.html">Admin Portal</a>
+        </div>
+        <div class="footer-links">
+          <h4>Info</h4>
+          <a href="pages/about.html">Legal Metrology Act 2009</a>
+          <a href="pages/about.html">LM General Rules 2011</a>
+          <a href="pages/about.html">GATC Rules 2013</a>
+          <a href="pages/about.html">About</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Metro360 by EvolveVI &mdash; Smart India Hackathon 2026</p>
+        <p>Department of Consumer Affairs &middot; Legal Metrology Division</p>
+      </div>
+    </div>
+  </footer>
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

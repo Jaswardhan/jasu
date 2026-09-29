@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register Entity — Metro360</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo">
+        <div class="logo-icon">M<span>360</span></div>
+        <div class="logo-text">
+          <span class="logo-name">Metro360</span>
+          <span class="logo-sub">by EvolveVI</span>
+        </div>
+      </a>
+      <div class="nav-links">
+        <a href="../index.html" class="nav-link">Home</a>
+        <a href="verify.html" class="nav-link">Verify QR</a>
+        <a href="consumer.html" class="nav-link">Consumer Portal</a>
+        <a href="about.html" class="nav-link">About</a>
+      </div>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" title="Toggle theme"><span class="theme-icon">🌙</span></button>
+        <a href="login.html" class="btn btn-outline">Login</a>
+        <a href="register.html" class="btn btn-primary active">Register</a>
+      </div>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="../index.html" class="mobile-link">Home</a>
+      <a href="verify.html" class="mobile-link">Verify QR</a>
+      <a href="consumer.html" class="mobile-link">Consumer Portal</a>
+      <a href="about.html" class="mobile-link">About</a>
+      <a href="login.html" class="mobile-link">Login</a>
+      <a href="register.html" class="mobile-link">Register</a>
+    </div>
+  </nav>
+
+  <section class="auth-page">
+    <div class="auth-bg">
+      <div class="auth-orb-1"></div>
+      <div class="auth-orb-2"></div>
+    </div>
+    <div class="container" style="display:flex; justify-content:center;">
+      <div class="auth-card" style="max-width:600px;">
+        <div class="auth-header">
+          <div class="logo-icon" style="display:inline-block; font-size:1.4rem; padding:10px 16px; margin-bottom:12px;">M<span>360</span></div>
+          <h1>Register Business / Entity</h1>
+          <p>Create a digital account under Legal Metrology Portal</p>
+        </div>
+
+        <form id="registerForm" onsubmit="handleRegister(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Entity Category</label>
+              <select class="form-select" id="regRole" required>
+                <option value="owner">Instrument Owner / Trader / Retailer</option>
+                <option value="manufacturer">Manufacturer / Importer</option>
+                <option value="gatc">GATC / Licensed Repairer</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Business / Entity Name</label>
+              <input type="text" class="form-input" placeholder="e.g. Rajesh Traders Pvt Ltd" required />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">GSTIN / Business ID</label>
+              <input type="text" class="form-input" placeholder="07AAAAA0000A1Z5" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Trade License / Reg No</label>
+              <input type="text" class="form-input" placeholder="LM-REG-2026-991" required />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Email Address</label>
+              <input type="email" class="form-input" placeholder="contact@trader.com" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Mobile Number</label>
+              <input type="tel" class="form-input" placeholder="9876543210" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">District Jurisdiction</label>
+            <select class="form-select" required>
+              <option>New Delhi Central Circle</option>
+              <option>South Delhi Circle</option>
+              <option>West Delhi Circle</option>
+              <option>Bengaluru Urban Circle</option>
+              <option>Mumbai Metropolitan Circle</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block form-submit">Complete Entity Registration</button>
+        </form>
+
+        <div class="auth-link">
+          Already registered? <a href="login.html">Sign In Here</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="nav-logo">
+            <div class="logo-icon">M<span>360</span></div>
+            <div class="logo-text"><span class="logo-name">Metro360</span><span class="logo-sub">by EvolveVI</span></div>
+          </div>
+          <p>Unified Digital Verification System for Weighing &amp; Measuring Instruments under Legal Metrology.</p>
+          <div class="footer-badge">SIH 2026 &middot; Problem ID: 26036</div>
+        </div>
+        <div class="footer-links">
+          <h4>Platform</h4>
+          <a href="login.html">Login</a>
+          <a href="register.html">Register</a>
+          <a href="verify.html">Verify Instrument</a>
+          <a href="consumer.html">Consumer Portal</a>
+        </div>
+        <div class="footer-links">
+          <h4>Dashboards</h4>
+          <a href="owner.html">Owner Portal</a>
+          <a href="lmo.html">LMO Portal</a>
+          <a href="gatc.html">GATC Portal</a>
+          <a href="manufacturer.html">Manufacturer Portal</a>
+          <a href="admin.html">Admin Portal</a>
+        </div>
+        <div class="footer-links">
+          <h4>Info</h4>
+          <a href="about.html">Legal Metrology Act 2009</a>
+          <a href="about.html">LM General Rules 2011</a>
+          <a href="about.html">GATC Rules 2013</a>
+          <a href="about.html">About</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Metro360 by EvolveVI &mdash; Smart India Hackathon 2026</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/app.js"></script>
+  <script>
+    function handleRegister(e) {
+      e.preventDefault();
+      const role = document.getElementById('regRole').value;
+      showToast('Registration successful! Logging in...', 'success');
+      setTimeout(() => quickLogin(role), 1000);
+    }
+  </script>
+</body>
+</html>
